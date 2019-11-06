@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "0aec2019-cf05-4dc0-b5fa-b31763b5ca69",
+		"name": "TestSuite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RandomUserAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "04546380-4cb9-473b-a73a-a226742773cd",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Gender is male\", () => {",
+							"",
+							" pm.expect(pm.response.json().results[0].gender).to.eql('male');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://randomuser.me/api/?inc=gender,name,nat",
+					"protocol": "https",
+					"host": [
+						"randomuser",
+						"me"
+					],
+					"path": [
+						"api",
+						""
+					],
+					"query": [
+						{
+							"key": "inc",
+							"value": "gender,name,nat"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BeerAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c29b027b-cfbb-4c6f-9228-33ad20acb8d5",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Name is Buzz\", () => {",
+							"",
+							" pm.expect(pm.response.json()[0].name).to.eql('Buzz');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FailingAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce84b9c9-b230-4a1d-a4cf-881ec9572e38",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yandex.ru/api/",
+					"protocol": "https",
+					"host": [
+						"yandex",
+						"ru"
+					],
+					"path": [
+						"api",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

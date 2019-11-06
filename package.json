@@ -1,0 +1,32 @@
+{
+  "name": "newman-prometheus-poc",
+  "version": "0.0.1",
+  "description": "Service avaliability check with Newman + Prometheus PoC",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel-node ./src/app.js",
+    "compile": "babel src --out-dir .compiled --source-maps --watch",
+    "nodemon": "nodemon --exec \"babel-node ./src/app.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "newman": "^4.5.5",
+    "prom-client": "^11.5.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.0",
+    "@babel/node": "^7.7.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/preset-env": "^7.7.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4"
+  }
+}
