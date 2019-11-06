@@ -20,7 +20,7 @@ const newmanRunner = (interval = 10000) => {
           const assertions = summary.run.executions.reduce((a, v) => (
             [
               ...a,
-              ...v.assertions.map(e => (
+              ...v.assertions.map((e) => (
                 {
                   service: v.item.name,
                   assertion: e.assertion,
