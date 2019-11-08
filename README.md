@@ -1,18 +1,19 @@
-Service avaliability check with Newman + Prometheus PoC
+![Perseus](https://raw.githubusercontent.com/mzezin/newman-prometheus-poc/master/logo.png "Perseus")
+
+Service avaliability check with Newman + Prometheus (PoC)
 =============================
 
-Run application
-
+Run application:
 1. `npm i`
 2. `npm start`
 
-Put Postman collection named as `collection.json` into `collection` folder.
+Put Postman collection named as `collection.json` into `collections` folder.
 
 Sample test cases:
-1. Random User API (randomuser.me)
+1. Random User API (https://randomuser.me)
     - status 200 (always passing)
     - user gender is male (random passing)
-2. Beer API (punkapi.com)
+2. Beer API (https://punkapi.com)
     - status 200 (always passing)
     - beer name is Buzz (always passing)
 3. Failing API (some random 404 url)
@@ -20,5 +21,20 @@ Sample test cases:
 
 Prometheus endpoint avaliable at http://localhost:3000/prometheus
 
+Build docker image:
 
+`docker build -t perseus-monitoring:latest . `
 
+Run docker image:
+
+`docker run -d -p 3000:3000 --name perseus-monitoring perseus-monitoring`
+
+Path variables:
+
+- `PORT` - server port (defaults to 3000)
+- `INTERNAL_METRICS` - add node.js app metrics to prometheus (defaults to false)
+- `POLLING_INTERVAL` - API check interval (defaults to 10000 ms) 
+
+Find port in use(MacOS):
+
+`lsof -nP -i4TCP:3000 | grep LISTEN`

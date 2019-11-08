@@ -5,3 +5,5 @@ yarn.lock
 .compiled/
 .vscode/
 dist/
+package-lock.json
+logo.png

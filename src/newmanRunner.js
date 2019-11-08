@@ -14,9 +14,9 @@ const newmanRunner = (interval = 10000) => {
     })
       .on('done', (err, summary) => {
         if (err) {
-          console.error('collection run encountered an error.');
+          setGauge({ service: 'Collection', assertion: 'Run status' }, 0);
         } else {
-          console.log('collection run completed.');
+          setGauge({ service: 'Collection', assertion: 'Run status' }, 1);
           const assertions = summary.run.executions.reduce((a, v) => (
             [
               ...a,
@@ -30,7 +30,6 @@ const newmanRunner = (interval = 10000) => {
           assertions.forEach((e) => {
             setGauge({ service: e.service, assertion: e.assertion }, e.passed ? 1 : 0);
           });
-          console.log(JSON.stringify(assertions, null, 4));
         }
       });
   }, interval);

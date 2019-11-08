@@ -1,6 +1,10 @@
-import { Registry, Gauge } from 'prom-client';
+import { Registry, Gauge, collectDefaultMetrics } from 'prom-client';
 
 const register = new Registry();
+
+if (process.env.INTERNAL_METRICS) {
+  collectDefaultMetrics({ timeout: process.env.POLLING_INTERVAL || 10000, register });
+}
 
 const gauge = new Gauge({
   name: 'perseus_health_check',

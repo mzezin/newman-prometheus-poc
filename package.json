@@ -2,18 +2,21 @@
   "name": "newman-prometheus-poc",
   "version": "0.0.1",
   "description": "Service avaliability check with Newman + Prometheus PoC",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "babel-node ./src/app.js",
+    "start": "babel-node ./src/server.js",
     "compile": "babel src --out-dir .compiled --source-maps --watch",
-    "nodemon": "nodemon --exec \"babel-node ./src/app.js\"",
+    "dev": "pm2 kill && pm2 start --interpreter babel-node ./src/server.js --watch --no-daemon --only=development",
+    "build": "webpack --mode production --config build-utils/webpack.server.config.js",
+    "prod": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "koa": "^2.11.0",
+    "koa-router": "^7.4.0",
     "newman": "^4.5.5",
     "prom-client": "^11.5.3"
   },
@@ -24,9 +27,13 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.4"
+    "pm2": "^4.1.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
   }
 }
