@@ -7,7 +7,7 @@ import newmanRunner from './newmanRunner';
 const app = new Koa();
 const router = new Router();
 
-router.get('/prometheus', async (ctx) => {
+router.get('/prometheus', ctx => {
   ctx.body = getMetrics();
 });
 
