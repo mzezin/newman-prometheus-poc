@@ -9,6 +9,8 @@
     "dev": "pm2 kill && pm2 start --interpreter babel-node ./src/server.js --watch --no-daemon --only=development",
     "build": "webpack --mode production --config build-utils/webpack.server.config.js",
     "prod": "node server.js",
+    "docker:build": "docker build -t perseus-monitoring:latest . ",
+    "docker:run": "docker run -d -p 3000:3000 --name perseus-monitoring perseus-monitoring",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
