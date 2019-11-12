@@ -125,6 +125,97 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Perseus positions",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "77049f67-54f6-4080-bcee-ba91ceca307f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e03adbc9-da5f-4538-89f3-f351f2409802",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Ticker is SBER\", () => {",
+							"",
+							" pm.expect(pm.response.json()[0].ticker).to.eql('SBER');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}quotes/api/v2.0/quotes?instrumentId=BBG004730N97",
+					"host": [
+						"{{baseUrl}}quotes"
+					],
+					"path": [
+						"api",
+						"v2.0",
+						"quotes"
+					],
+					"query": [
+						{
+							"key": "instrumentId",
+							"value": "BBG004730N97"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6e71bd72-18ce-4be8-abb4-7517cf7293a2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fa1667c3-fb19-46de-a212-f4d2b69f9030",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

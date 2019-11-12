@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node ./src/server.js",
     "compile": "babel src --out-dir .compiled --source-maps --watch",
-    "dev": "pm2 kill && pm2 start --interpreter babel-node ./src/server.js --watch --no-daemon --only=development",
+    "nodemon": "nodemon --exec \"babel-node ./src/server.js\"",
     "build": "webpack --mode production --config build-utils/webpack.server.config.js",
     "prod": "node server.js",
     "docker:build": "docker build -t perseus-monitoring:latest . ",
@@ -17,8 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "koa": "^2.11.0",
-    "koa-router": "^7.4.0",
     "newman": "^4.5.5",
     "prom-client": "^11.5.3"
   },
@@ -33,7 +33,7 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "pm2": "^4.1.2",
+    "nodemon": "^1.19.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-node-externals": "^1.7.2"
