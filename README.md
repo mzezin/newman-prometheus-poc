@@ -3,26 +3,13 @@
 # Service avaliability check with Newman + Prometheus (PoC)
 
 
+Put Postman collection named as `collection.json` into `collections` folder.
+
 ## Run application:
 1. `npm install`
 2. `npm start`
 
 Prometheus endpoint avaliable at http://localhost:3000/prometheus
-
-## Sample collecton
-
-Put Postman collection named as `collection.json` into `collections` folder.
-
-## Sample test cases:
-1. Random User API (https://randomuser.me)
-    - status 200 (always passing)
-    - user gender is male (random passing)
-2. Beer API (https://punkapi.com)
-    - status 200 (always passing)
-    - beer name is Buzz (always passing)
-3. Failing API (some random 404 url)
-    - status 200 (never passing)
-
 
 ## Build docker image: 
 
@@ -41,10 +28,17 @@ or
 `npm run docker:run `
 
 ## Path variables:
-
+#### Mandatory:
+- `BASEURL` - use {{baseUrl}} in Postman
+- `USERNAME` - use {{username}} in Postman
+- `PASSWORD` - use {{password}} in Postman
+#### Optional: 
+- `TIMEOUT` - request timeout (defaults to 500)
+- `ENDPOINT_NAME` - endpoint name (defaults to `prometheus`)
 - `PORT` - server port (defaults to 3000)
 - `INTERNAL_METRICS` - add node.js app metrics to prometheus (defaults to false)
 - `POLLING_INTERVAL` - API check interval (defaults to 10000 ms) 
+
 
 ## Find port in use(MacOS):
 
