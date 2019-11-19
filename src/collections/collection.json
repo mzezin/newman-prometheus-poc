@@ -6,128 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "RandomUserAPI",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "04546380-4cb9-473b-a73a-a226742773cd",
-						"exec": [
-							"pm.test(\"Status 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Gender is male\", () => {",
-							"",
-							" pm.expect(pm.response.json().results[0].gender).to.eql('male');",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://randomuser.me/api/?inc=gender,name,nat",
-					"protocol": "https",
-					"host": [
-						"randomuser",
-						"me"
-					],
-					"path": [
-						"api",
-						""
-					],
-					"query": [
-						{
-							"key": "inc",
-							"value": "gender,name,nat"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "BeerAPI",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c29b027b-cfbb-4c6f-9228-33ad20acb8d5",
-						"exec": [
-							"pm.test(\"Status 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Name is Buzz\", () => {",
-							"",
-							" pm.expect(pm.response.json()[0].name).to.eql('Buzz');",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.punkapi.com/v2/beers/1",
-					"protocol": "https",
-					"host": [
-						"api",
-						"punkapi",
-						"com"
-					],
-					"path": [
-						"v2",
-						"beers",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "FailingAPI",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ce84b9c9-b230-4a1d-a4cf-881ec9572e38",
-						"exec": [
-							"pm.test(\"Status 200\", () => {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://yandex.ru/api/",
-					"protocol": "https",
-					"host": [
-						"yandex",
-						"ru"
-					],
-					"path": [
-						"api",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Perseus positions",
+			"name": "Quotes",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -148,6 +27,12 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
+							"",
+							"pm.test(\"Lower then 200 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							"",
+							"",
 							"pm.test(\"Ticker is SBER\", () => {",
 							"",
 							" pm.expect(pm.response.json()[0].ticker).to.eql('SBER');",
@@ -161,11 +46,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}quotes/api/v2.0/quotes?instrumentId=BBG004730N97",
+					"raw": "{{baseUrl}}/quotes/api/v2.0/quotes?instrumentId=BBG004730N97",
 					"host": [
-						"{{baseUrl}}quotes"
+						"{{baseUrl}}"
 					],
 					"path": [
+						"quotes",
 						"api",
 						"v2.0",
 						"quotes"
@@ -174,6 +60,141 @@
 						{
 							"key": "instrumentId",
 							"value": "BBG004730N97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instruments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e9ab53b-2072-4f8d-be1b-874166a52389",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Lower then 200 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Ticker is SBER\", () => {",
+							" pm.expect(pm.response.json().equities[0].ticker).to.eql('SBER');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f6bf0f02-5512-49af-b18b-a50c50c0dc25",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/instruments/api/instruments?ids=BBG004730N97",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"instruments",
+						"api",
+						"instruments"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "BBG004730N97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db904fdc-ac24-46b7-9187-f1ace97c90c8",
+						"exec": [
+							"pm.test(\"Status 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Lower then 1000 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/pdf');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5e64217f-5ec7-425e-a329-65f5c3aec4d6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Roles",
+						"type": "text",
+						"value": " PERSEUS_PARTNER_EF_REPORT"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/reports/api/v4/reports/client?account=484493&currency=RUB&clientName=Dummy&genAgreement=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"reports",
+						"api",
+						"v4",
+						"reports",
+						"client"
+					],
+					"query": [
+						{
+							"key": "account",
+							"value": "484493"
+						},
+						{
+							"key": "currency",
+							"value": "RUB"
+						},
+						{
+							"key": "clientName",
+							"value": "Dummy"
+						},
+						{
+							"key": "genAgreement",
+							"value": "1"
 						}
 					]
 				}
