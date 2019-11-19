@@ -5,4 +5,4 @@ yarn.lock
 .compiled/
 .vscode/
 dist/
-src/collections/collection.json
+src/collections/
